@@ -18,5 +18,5 @@ RUN mkdir tmp
 RUN mv /tmp/node_modules/ /app/
 RUN yarn build
 
-CMD ["yarn", "start"]
+CMD ["yarn", "serve"]
 
