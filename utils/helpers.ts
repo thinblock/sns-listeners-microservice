@@ -58,6 +58,10 @@ const validateAndConfirmMessage = async (notification: ISNSEvent): Promise<strin
   }
 
   // If the notification type is SubscriptionConfirmation, confirm it
+  console.log(
+    notification.Type === SNSEvents.SubscriptionConfirmation,
+    notification.Type, SNSEvents.SubscriptionConfirmation
+  );
   if (notification.Type === SNSEvents.SubscriptionConfirmation) {
     const done = await verifySNSSubscription(notification);
     if (done) {

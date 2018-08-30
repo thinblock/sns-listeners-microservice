@@ -37,7 +37,7 @@ export default class PeriodicalCronListener implements IController {
       .populate('actions.action', 'event_name params_schema').exec();
       console.log(jobs);
       // TODO: Make it run in background in a queue
-      for (let i = 0; i <= jobs.length; i++) {
+      for (let i = 0; i < jobs.length; i++) {
         const job = jobs[i];
         // TODO: failed jobs goes to retry queue
         const [err] = await to(
