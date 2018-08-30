@@ -40,7 +40,7 @@ export default class PeriodicalCronListener implements IController {
         const job = jobs[i];
         // TODO: failed jobs goes to retry queue
         const [err] = await to(
-          (config.jobConditionEvaluateTopicARN, JSON.stringify(job))
+          publishMessage(config.jobConditionEvaluateTopicARN, JSON.stringify(job))
         );
 
         if (err) {
