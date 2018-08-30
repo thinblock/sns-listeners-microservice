@@ -50,7 +50,7 @@ const isValidSNSMessage = async (message: ISNSEvent): Promise<boolean> => {
   });
 };
 
-const validateAndConfirmMessage = async (notification: ISNSEvent): Promise<boolean> => {
+const validateAndConfirmMessage = async (notification: ISNSEvent): Promise<string> => {
     // Verify if the message is from AWS SNS
   const isValid = await isValidSNSMessage(notification);
   if (!isValid) {
@@ -60,15 +60,18 @@ const validateAndConfirmMessage = async (notification: ISNSEvent): Promise<boole
   // If the notification type is SubscriptionConfirmation, confirm it
   if (notification.Type === SNSEvents.SubscriptionConfirmation) {
     const done = await verifySNSSubscription(notification);
-    throw done ? 'success' : new InternalServerError();
+    if (done) {
+      return 'confirmed';
+    }
+    throw new InternalServerError();
   }
 
   // Do nothing
   if (notification.Type === SNSEvents.UnsubscribeConfirmation) {
-    throw 'ok';
+    return 'nothing';
   }
 
-  return true;
+  return 'success';
 };
 
 export {

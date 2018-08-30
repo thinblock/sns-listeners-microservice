@@ -13,10 +13,10 @@ export default class PeriodicalCronListener implements IController {
   public async post(req: IRequest, res: IResponse, next: Next) {
     try {
       const notification: ISNSEvent = req.body;
-      const [err] = <[Error]> await to(validateAndConfirmMessage(notification));
+      const [err, result] = <[Error, string]> await to(validateAndConfirmMessage(notification));
 
-      if (err) {
-        return res.send(err);
+      if (err || result !== 'success') {
+        return res.send(err || result);
       }
 
       const trigger = await Trigger.findOne({ event_name: 'cron_periodical_time' });
