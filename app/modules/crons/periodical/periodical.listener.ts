@@ -13,14 +13,15 @@ export default class PeriodicalCronListener implements IController {
   public async post(req: IRequest, res: IResponse, next: Next) {
     try {
       const notification: ISNSEvent = req.body;
+      console.log(notification);
       const [err, result] = <[Error, string]> await to(validateAndConfirmMessage(notification));
-
+      console.log(err, result);
       if (err || result !== 'success') {
         return res.send(err || result);
       }
 
       const trigger = await Trigger.findOne({ event_name: 'cron_periodical_time' });
-
+      console.log(trigger.toJSON());
       if (!trigger) {
         // log error and return success to sns
         req.log.error('Trigger with event_type: cron_periodical_time not found');
@@ -34,7 +35,7 @@ export default class PeriodicalCronListener implements IController {
         }
       }, ['_id', 'trigger.conditions'])
       .populate('actions.action', 'event_name params_schema').exec();
-
+      console.log(jobs);
       // TODO: Make it run in background in a queue
       for (let i = 0; i <= jobs.length; i++) {
         const job = jobs[i];
