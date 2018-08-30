@@ -1,7 +1,6 @@
 import { SNS, SharedIniFileCredentials } from 'aws-sdk';
-import MessageValidator from 'sns-validator';
+import MessageValidator = require('sns-validator');
 import { ISNSEvent, SNSEvents } from '../app/interfaces/utils/IAWS';
-import { config } from '../config/env';
 import { logger } from './logger';
 import { oneLine } from 'common-tags';
 import { UnauthorizedError, InternalServerError } from 'restify-errors';
