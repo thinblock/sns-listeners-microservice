@@ -33,7 +33,7 @@ export default class PeriodicalCronListener implements IController {
 
       const jobs = await Job.find({ active: true, 'trigger.id': trigger._id })
       .populate('actions.action', 'event_name params_schema sns_topic_arn')
-      .select('_id trigger.conditions actions')
+      .select('_id trigger.conditions actions last_run')
       .exec();
 
       req.log.info(oneLine`
