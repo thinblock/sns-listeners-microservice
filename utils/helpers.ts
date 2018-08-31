@@ -5,7 +5,7 @@ import { logger } from './logger';
 import { oneLine } from 'common-tags';
 import { UnauthorizedError, InternalServerError } from 'restify-errors';
 
-const publishMessage = async (TopicArn: string, Message: string) => {
+const publishMessage = async (TopicArn: string, Message: string): Promise<SNS.PublishResponse> => {
   const snsClient = new SNS({
     credentials: new SharedIniFileCredentials({ profile: 'thinblock' })
   });

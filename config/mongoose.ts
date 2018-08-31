@@ -12,7 +12,7 @@ async function initDb() {
     useNewUrlParser: true
   };
   try {
-    await mongoose.connect(config.db, options);
+    await mongoose.connect(config().db, options);
     logger.info('DB Connected');
   } catch (e) {
     logger.error('Unable to connect to the database:', e);

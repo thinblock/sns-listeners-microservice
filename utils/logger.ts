@@ -17,7 +17,7 @@ infoStream.write = (info: any): boolean => {
 };
 
 let settings: LoggerSettings = {
-  name: config.env,
+  name: config().env,
   serializers: {
     req: (req: Request) => ({
       headers: req.headers,
@@ -25,14 +25,18 @@ let settings: LoggerSettings = {
       method: req.method
     }),
   },
-  streams: [{ level: 'info', path: `logs/api.log` }]
+  streams: []
 };
 
-if (config.env === 'development') {
+if (config().env === 'development') {
   settings.streams.push({ level: 'info', stream: infoStream });
 }
 
-if (config.debug) {
+if (config().env === 'production') {
+  settings.streams.push({ level: 'info', path: `logs/api.log` });
+}
+
+if (config().debug) {
   settings.streams.push({ level: 'trace', stream: infoStream });
   settings.streams.push({ level: 'debug', path: 'debug.log' });
 }

@@ -19,7 +19,7 @@ const oAuth = async (req: IRequest, res: IResponse, next: restify.Next) => {
   let decodedToken: IOAuthToken = null;
 
   try {
-    decodedToken = <IOAuthToken>verify(token, config.oAuthSecret);
+    decodedToken = <IOAuthToken>verify(token, config().oAuthSecret);
     if (!decodedToken) {
       return res.send(new UnauthorizedError({
         message: 'Provided Access Token was invalid or expired'

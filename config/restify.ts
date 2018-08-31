@@ -43,7 +43,7 @@ const buildServer = async (): Promise<restify.Server> => {
     return next();
   });
 
-  if (config.env !== 'test') {
+  if (config().env !== 'test') {
     app.use(requestsLogger());
   }
 
@@ -52,7 +52,7 @@ const buildServer = async (): Promise<restify.Server> => {
   for (const file of files) {
     try {
       const ServerRoute = (
-        await import(path.join(config.root, file.replace('.ts', '.js')))
+        await import(path.join(config().root, file.replace('.ts', '.js')))
       ).default;
       const servRoute: IRoute = new ServerRoute();
       const basePath = servRoute.basePath;
@@ -73,7 +73,7 @@ const buildServer = async (): Promise<restify.Server> => {
         argsArr.push(options);
 
         // For testing, all endpoints are public so we only focus on those handlers
-        if (config.env !== 'test') {
+        if (config().env !== 'test') {
           switch (route.auth) {
           case AuthStrategies.OAUTH:
             argsArr.push(auth.oAuth);
