@@ -27,6 +27,10 @@ const ActionsSchema = new Schema({
     type: String,
     required: true
   },
+  sns_topic_arn: {
+    type: String,
+    unique: true
+  },
   params_schema: [ParamsSchema],
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
