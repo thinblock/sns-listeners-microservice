@@ -28,7 +28,7 @@
     "restify-errors": "^6.1.1",
     "restify-joi-middleware": "^5.0.0",
     "restify-logger": "^2.0.1",
-    "sequelize": "^4.38.0",
+    "sequelize": "^5.15.1",
     "sns-validator": "^0.3.4",
     "yarn": "^1.9.4"
   },
