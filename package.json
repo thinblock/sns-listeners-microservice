@@ -30,7 +30,7 @@
     "restify-logger": "^2.0.1",
     "sequelize": "^4.38.0",
     "sns-validator": "^0.3.4",
-    "yarn": "^1.9.4"
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "@types/async": "^2.0.49",
