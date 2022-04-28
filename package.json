@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "add": "^2.0.6",
-    "async": "^2.6.1",
+    "async": "^2.6.4",
     "await-to-js": "^2.0.1",
     "aws-sdk": "^2.295.0",
     "bcrypt": "^3.0.0",
